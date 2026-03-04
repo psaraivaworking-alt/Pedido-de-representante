@@ -3,67 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Pedidos Pro</title>
+    <title>Formulário de Pedidos Veloz</title>
     <style>
-        :root {
-            --primary: #6c5ce7;
-            --secondary: #2ecc71;
-            --bg: #f0f2f5;
-            --card: #ffffff;
-            --text: #333;
-        }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: var(--text); }
+        :root { --primary: #6c5ce7; --secondary: #2ecc71; --bg: #f0f2f5; --card: #ffffff; --text: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; color: var(--text); }
         .container { max-width: 600px; margin: 0 auto; background: var(--card); padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; margin-bottom: 25px; color: var(--primary); }
-        
-        .input-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; }
-        input[type="text"] { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input[type="text"]:focus { border-color: var(--primary); }
-
-        .product-card { border: 1px solid #eee; padding: 15px; border-radius: 12px; margin-bottom: 15px; background: #fff; position: relative; }
-        .product-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        
-        .product-img { width: 75px; height: 75px; background: #f8f8f8; border-radius: 10px; object-fit: cover; border: 1px solid #ddd; cursor: zoom-in; transition: 0.2s; }
-        .product-img:hover { transform: scale(1.05); }
-
+        .logo-container { text-align: center; margin-bottom: 10px; }
+        .logo-img { max-width: 180px; height: auto; }
+        h2 { text-align: center; margin-bottom: 25px; color: var(--primary); font-size: 1.3em; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
+        .product-card { border: 1px solid #eee; padding: 15px; border-radius: 12px; margin-bottom: 15px; background: #fff; }
+        .product-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
+        .product-img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 1px solid #ddd; cursor: zoom-in; }
         .product-info { flex: 1; }
-        .product-info strong { display: block; font-size: 1.1em; }
-        .price-tag { color: var(--primary); font-weight: bold; font-size: 0.95em; }
-
-        .variations { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 10px; background: #fcfcfc; padding: 10px; border-radius: 8px; }
+        .price-tag { color: var(--primary); font-weight: bold; font-size: 0.9em; }
+        .variations { display: grid; grid-template-columns: repeat(auto-fit, minmax(55px, 1fr)); gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 8px; }
         .var-item { display: flex; flex-direction: column; align-items: center; }
-        .var-item label { font-size: 0.75em; margin-bottom: 4px; color: #666; font-weight: bold; }
-        .var-item input { width: 100%; max-width: 60px; padding: 8px; text-align: center; border: 1px solid #ddd; border-radius: 6px; font-weight: bold; }
-
-        .total-section { background: var(--primary); color: white; padding: 20px; border-radius: 10px; margin-top: 25px; font-size: 1.3em; font-weight: bold; text-align: center; }
-        
-        button#btnEnviar { width: 100%; padding: 18px; background: var(--secondary); color: white; border: none; border-radius: 10px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s; }
-        button#btnEnviar:hover { background: #27ae60; }
-        button#btnEnviar:disabled { background: #ccc; cursor: not-allowed; }
-
-        #modalFoto { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        #modalFoto img { max-width: 90%; max-height: 80%; border-radius: 10px; box-shadow: 0 0 30px rgba(0,0,0,0.5); border: 3px solid white; }
-        .fechar-modal { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; font-weight: bold; cursor: pointer; }
-
-        @media (max-width: 480px) { .variations { grid-template-columns: repeat(3, 1fr); } }
+        .var-item label { font-size: 0.7em; margin-bottom: 3px; color: #666; }
+        .var-item input { width: 100%; max-width: 50px; padding: 6px; text-align: center; border: 1px solid #ccc; border-radius: 5px; }
+        .total-section { background: var(--primary); color: white; padding: 15px; border-radius: 10px; margin-top: 20px; font-size: 1.2em; font-weight: bold; text-align: center; }
+        button#btnEnviar { width: 100%; padding: 18px; background: var(--secondary); color: white; border: none; border-radius: 10px; font-size: 1.1em; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        #modalFoto { display: none; position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
+        #modalFoto img { max-width: 90%; max-height: 80%; border: 3px solid white; border-radius: 5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>📝 Pedido de Materiais</h2>
+    <div class="logo-container">
+        <img src="https://central-de-donwload.vercel.app/img/Nova%20Marca%20Veloz%20Fundo%20Branco.png" alt="Logo" class="logo-img">
+    </div>
+
+    <h2>Pedido de Merchandise</h2>
     
     <div class="input-group">
-        <label>Seu Nome</label>
-        <input type="text" id="clienteNome" placeholder="Digite seu nome completo">
+        <label>Nome do Representante</label>
+        <input type="text" id="clienteNome" placeholder="Seu nome completo">
     </div>
 
     <div id="lista-produtos">
         <div class="product-card" data-nome="Boné Roxo" data-preco="15">
             <div class="product-header">
                 <img src="https://i.postimg.cc/6Q9YxtSm/imagem-2026-03-04-145046990.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Boné Roxo</strong><span class="price-tag">R$ 15,00 unid.</span></div>
+                <div class="product-info"><strong>Boné Roxo</strong><br><span class="price-tag">R$ 15,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>Qtd</label><input type="number" class="qtd" min="0" value="0" onchange="calcularTotal()"></div>
@@ -73,7 +57,7 @@
         <div class="product-card" data-nome="Boné Pescador" data-preco="10">
             <div class="product-header">
                 <img src="https://i.postimg.cc/JhL41dcS/imagem-2026-03-04-145832148.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Boné Pescador</strong><span class="price-tag">R$ 10,00 unid.</span></div>
+                <div class="product-info"><strong>Boné Pescador</strong><br><span class="price-tag">R$ 10,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>Qtd</label><input type="number" class="qtd" min="0" value="0" onchange="calcularTotal()"></div>
@@ -83,7 +67,7 @@
         <div class="product-card" data-nome="Boné Australiano" data-preco="9">
             <div class="product-header">
                 <img src="https://i.postimg.cc/yxts2fNH/imagem-2026-03-04-145918268.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Boné Australiano</strong><span class="price-tag">R$ 9,00 unid.</span></div>
+                <div class="product-info"><strong>Boné Australiano</strong><br><span class="price-tag">R$ 9,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>Qtd</label><input type="number" class="qtd" min="0" value="0" onchange="calcularTotal()"></div>
@@ -93,7 +77,7 @@
         <div class="product-card" data-nome="Chaveiro" data-preco="1.80">
             <div class="product-header">
                 <img src="https://i.postimg.cc/4d3GyC74/imagem-2026-03-04-145951076.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Chaveiro</strong><span class="price-tag">R$ 1,80 unid.</span></div>
+                <div class="product-info"><strong>Chaveiro</strong><br><span class="price-tag">R$ 1,80</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>Qtd</label><input type="number" class="qtd" min="0" value="0" onchange="calcularTotal()"></div>
@@ -103,7 +87,7 @@
         <div class="product-card" data-nome="Camisa Manga Curta" data-preco="25">
             <div class="product-header">
                 <img src="https://i.postimg.cc/W3tRjMC4/image.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Camisa Manga Curta</strong><span class="price-tag">R$ 25,00 unid.</span></div>
+                <div class="product-info"><strong>Camisa Manga Curta</strong><br><span class="price-tag">R$ 25,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>P</label><input type="number" class="qtd" data-v="P" min="0" value="0" onchange="calcularTotal()"></div>
@@ -117,7 +101,7 @@
         <div class="product-card" data-nome="Camisa Manga Longa" data-preco="25">
             <div class="product-header">
                 <img src="https://i.postimg.cc/VkRLkWGm/imagem-2026-03-04-150142972.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Camisa Manga Longa</strong><span class="price-tag">R$ 25,00 unid.</span></div>
+                <div class="product-info"><strong>Camisa Manga Longa</strong><br><span class="price-tag">R$ 25,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>P</label><input type="number" class="qtd" data-v="P" min="0" value="0" onchange="calcularTotal()"></div>
@@ -133,8 +117,7 @@
     <button id="btnEnviar" onclick="enviarPedido()">Finalizar e Enviar 🚀</button>
 </div>
 
-<div id="modalFoto" onclick="fecharFoto()">
-    <span class="fechar-modal">&times;</span>
+<div id="modalFoto" onclick="this.style.display='none'">
     <img id="imgExpandida" src="">
 </div>
 
@@ -142,12 +125,6 @@
     function abrirFoto(src) {
         document.getElementById('imgExpandida').src = src;
         document.getElementById('modalFoto').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function fecharFoto() {
-        document.getElementById('modalFoto').style.display = 'none';
-        document.body.style.overflow = 'auto';
     }
 
     function calcularTotal() {
@@ -164,7 +141,7 @@
     async function enviarPedido() {
         const nomeInput = document.getElementById('clienteNome');
         const btn = document.getElementById('btnEnviar');
-        const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
+        const URL_SCRIPT = "SEU_NOVO_URL_AQUI"; 
 
         if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
 
@@ -176,15 +153,12 @@
             chaveiro: 0,
             camisa_curta: "",
             camisa_longa: "",
-            total: 0
+            total: document.getElementById('valorTotal').innerText
         };
 
-        let totalGeral = 0;
         let temItem = false;
-
         document.querySelectorAll('.product-card').forEach(card => {
             const nomeProd = card.dataset.nome;
-            const preco = parseFloat(card.dataset.preco);
             let qtdCard = 0;
             let detalhes = "";
 
@@ -194,7 +168,6 @@
                     const v = input.dataset.v || "";
                     if(v) detalhes += `${v}:${q} `;
                     qtdCard += q;
-                    totalGeral += q * preco;
                     temItem = true;
                 }
             });
@@ -208,31 +181,16 @@
         });
 
         if (!temItem) return alert("Selecione pelo menos um item.");
-        dados.total = "R$ " + totalGeral.toFixed(2).replace('.', ',');
 
         try {
             btn.disabled = true;
-            btn.innerText = "⏳ Tentando enviar...";
-
-            const controller = new AbortController();
-            const id = setTimeout(() => controller.abort(), 15000);
-
-            await fetch(URL_SCRIPT, { 
-                method: 'POST', 
-                mode: 'no-cors', 
-                cache: 'no-cache',
-                signal: controller.signal,
-                body: JSON.stringify(dados) 
-            });
-
-            clearTimeout(id);
-            alert("✅ Pedido enviado! Verifique sua planilha.");
+            btn.innerText = "⏳ Enviando...";
+            await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
+            alert("✅ Pedido enviado com sucesso para a planilha!");
             location.reload();
         } catch (e) {
-            console.error("Erro capturado:", e);
-            alert("❌ Erro de conexão ou tempo esgotado. Verifique sua rede.");
+            alert("❌ Erro de conexão.");
             btn.disabled = false;
-            btn.innerText = "Finalizar e Enviar 🚀";
         }
     }
 </script>
