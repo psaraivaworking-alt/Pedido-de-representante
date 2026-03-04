@@ -18,6 +18,7 @@
         .product-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
         .product-img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 1px solid #ddd; cursor: zoom-in; }
         .product-info { flex: 1; }
+        .product-desc { display: block; font-size: 0.75em; color: #666; margin-top: 2px; line-height: 1.2; font-weight: normal; }
         .price-tag { color: var(--primary); font-weight: bold; font-size: 0.9em; }
         .variations { display: grid; grid-template-columns: repeat(auto-fit, minmax(55px, 1fr)); gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 8px; }
         .var-item { display: flex; flex-direction: column; align-items: center; }
@@ -44,9 +45,23 @@
     </div>
 
     <div id="lista-produtos">
+        <div class="product-card" data-nome="Caneta" data-preco="3">
+            <div class="product-header">
+                <img src="https://i.postimg.cc/P58MwKvk/5c0af907-237d-4aff-9d4f-b70772fd6011.jpg" class="product-img" onclick="abrirFoto(this.src)" alt="Caneta">
+                <div class="product-info">
+                    <strong>Caneta</strong>
+                    <span class="product-desc">Valor estimado</span>
+                    <span class="price-tag">R$ 3,00</span>
+                </div>
+            </div>
+            <div class="variations">
+                <div class="var-item"><label>Qtd</label><input type="number" class="qtd" min="0" value="0" onchange="calcularTotal()"></div>
+            </div>
+        </div>
+
         <div class="product-card" data-nome="Boné Roxo" data-preco="15">
             <div class="product-header">
-                <img src="https://i.postimg.cc/6Q9YxtSm/imagem-2026-03-04-145046990.png" class="product-img" onclick="abrirFoto(this.src)">
+                <img src="https://i.postimg.cc/jjtJShzh/Design-sem-nome-(62).jpg" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Boné Roxo</strong><br><span class="price-tag">R$ 15,00</span></div>
             </div>
             <div class="variations">
@@ -56,7 +71,7 @@
 
         <div class="product-card" data-nome="Boné Pescador" data-preco="10">
             <div class="product-header">
-                <img src="https://i.postimg.cc/JhL41dcS/imagem-2026-03-04-145832148.png" class="product-img" onclick="abrirFoto(this.src)">
+                <img src="https://i.postimg.cc/wM7NdTDS/Design-sem-nome-(61).jpg" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Boné Pescador</strong><br><span class="price-tag">R$ 10,00</span></div>
             </div>
             <div class="variations">
@@ -66,7 +81,7 @@
 
         <div class="product-card" data-nome="Boné Australiano" data-preco="9">
             <div class="product-header">
-                <img src="https://i.postimg.cc/yxts2fNH/imagem-2026-03-04-145918268.png" class="product-img" onclick="abrirFoto(this.src)">
+                <img src="https://i.postimg.cc/TYbyjs0c/Design-sem-nome-(8).png" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Boné Australiano</strong><br><span class="price-tag">R$ 9,00</span></div>
             </div>
             <div class="variations">
@@ -76,7 +91,7 @@
 
         <div class="product-card" data-nome="Chaveiro" data-preco="1.80">
             <div class="product-header">
-                <img src="https://i.postimg.cc/4d3GyC74/imagem-2026-03-04-145951076.png" class="product-img" onclick="abrirFoto(this.src)">
+                <img src="https://i.postimg.cc/MT4TV0Qj/Design-sem-nome-(64).jpg" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Chaveiro</strong><br><span class="price-tag">R$ 1,80</span></div>
             </div>
             <div class="variations">
@@ -86,8 +101,12 @@
 
         <div class="product-card" data-nome="Camisa Manga Curta" data-preco="25">
             <div class="product-header">
-                <img src="https://i.postimg.cc/W3tRjMC4/image.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Camisa Manga Curta</strong><br><span class="price-tag">R$ 25,00</span></div>
+                <img src="https://i.postimg.cc/nLhvnJbR/Whats-App-Image-2026-03-04-at-16-28-24-(1).jpg" class="product-img" onclick="abrirFoto(this.src)">
+                <div class="product-info">
+                    <strong>Camisa Manga Curta</strong>
+                    <span class="product-desc">Camisas em sublimação total, tecido UV, malha fria e proteção +</span>
+                    <span class="price-tag">R$ 25,00</span>
+                </div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>P</label><input type="number" class="qtd" data-v="P" min="0" value="0" onchange="calcularTotal()"></div>
@@ -100,8 +119,12 @@
 
         <div class="product-card" data-nome="Camisa Manga Longa" data-preco="25">
             <div class="product-header">
-                <img src="https://i.postimg.cc/VkRLkWGm/imagem-2026-03-04-150142972.png" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info"><strong>Camisa Manga Longa</strong><br><span class="price-tag">R$ 25,00</span></div>
+                <img src="https://i.postimg.cc/Xvsk5vkG/Whats-App-Image-2026-03-04-at-16-28-24.jpg" class="product-img" onclick="abrirFoto(this.src)">
+                <div class="product-info">
+                    <strong>Camisa Manga Longa</strong>
+                    <span class="product-desc">Camisas em sublimação total, tecido UV, malha fria e proteção +</span>
+                    <span class="price-tag">R$ 25,00</span>
+                </div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>P</label><input type="number" class="qtd" data-v="P" min="0" value="0" onchange="calcularTotal()"></div>
@@ -147,6 +170,7 @@
 
         let dados = {
             nome: nomeInput.value,
+            caneta: 0,
             bone_roxo: 0,
             bone_pescador: 0,
             bone_australiano: 0,
@@ -172,6 +196,7 @@
                 }
             });
 
+            if (nomeProd === "Caneta") dados.caneta = qtdCard;
             if (nomeProd === "Boné Roxo") dados.bone_roxo = qtdCard;
             if (nomeProd === "Boné Pescador") dados.bone_pescador = qtdCard;
             if (nomeProd === "Boné Australiano") dados.bone_australiano = qtdCard;
@@ -191,6 +216,7 @@
         } catch (e) {
             alert("❌ Erro de conexão.");
             btn.disabled = false;
+            btn.innerText = "Finalizar e Enviar 🚀";
         }
     }
 </script>
