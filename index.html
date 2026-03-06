@@ -150,14 +150,21 @@
     async function enviarPedido() {
         const nomeInput = document.getElementById('clienteNome');
         const btn = document.getElementById('btnEnviar');
-        const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
+        // NOVO LINK ATUALIZADO ABAIXO
+        const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwzk0Lfq6Imle8Dt7dr-2FsYwBqMP3SCqcFHblq74IHlMKvNA0nGNHxOP0U6ZcdMoOX/exec"; 
 
         if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
 
+        // Objeto blindado para o Script ler sem pular colunas
         let dados = {
             nome: nomeInput.value,
-            caneta: 0, bone_roxo: 0, bone_pescador: 0, bone_australiano: 0, chaveiro: 0,
-            camisa_longa: "", camisa_curta: "",
+            caneta: 0,
+            bone_roxo: 0,
+            bone_pescador: 0,
+            bone_australiano: 0,
+            chaveiro: 0,
+            camisa_longa: "",
+            camisa_curta: "",
             total: document.getElementById('valorTotal').innerText
         };
 
@@ -177,7 +184,7 @@
                 }
             });
 
-            if (key.startsWith("camisa")) {
+            if (key === "camisa_longa" || key === "camisa_curta") {
                 dados[key] = detalhes.trim();
             } else {
                 dados[key] = qtdTotal;
@@ -189,11 +196,18 @@
         try {
             btn.disabled = true;
             btn.innerText = "⏳ Enviando...";
-            await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
-            alert("✅ Pedido enviado com sucesso!");
+            
+            // Envio via POST (no-cors para evitar bloqueios de navegador)
+            await fetch(URL_SCRIPT, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                body: JSON.stringify(dados) 
+            });
+
+            alert("✅ Pedido enviado! Verifique sua planilha.");
             location.reload();
         } catch (e) {
-            alert("❌ Erro de conexão.");
+            alert("❌ Erro ao enviar. Tente novamente.");
             btn.disabled = false;
             btn.innerText = "Finalizar e Enviar 🚀";
         }
