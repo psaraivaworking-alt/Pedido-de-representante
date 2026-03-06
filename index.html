@@ -1,7 +1,8 @@
-<html lang="pt-br"><head>
+<html lang="pt-br">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Pedidos Veloz</title>
+    <title>Formulário Veloz - Oficial</title>
     <style>
         :root { --primary: #6c5ce7; --secondary: #2ecc71; --bg: #f0f2f5; --card: #ffffff; --text: #333; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; color: var(--text); }
@@ -16,7 +17,6 @@
         .product-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
         .product-img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 1px solid #ddd; cursor: zoom-in; }
         .product-info { flex: 1; }
-        .product-desc { display: block; font-size: 0.75em; color: #666; margin-top: 2px; line-height: 1.2; font-weight: normal; }
         .price-tag { color: var(--primary); font-weight: bold; font-size: 0.9em; }
         .variations { display: grid; grid-template-columns: repeat(auto-fit, minmax(55px, 1fr)); gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 8px; }
         .var-item { display: flex; flex-direction: column; align-items: center; }
@@ -147,67 +147,57 @@
         document.getElementById('valorTotal').innerText = total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
-async function enviarPedido() {
-    const nomeInput = document.getElementById('clienteNome');
-    const btn = document.getElementById('btnEnviar');
-    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
+    async function enviarPedido() {
+        const nomeInput = document.getElementById('clienteNome');
+        const btn = document.getElementById('btnEnviar');
+        const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
 
-    if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
+        if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
 
-    let dados = {
-        nome: nomeInput.value,
-        caneta: 0,
-        bone_roxo: 0,
-        bone_pescador: 0,
-        bone_australiano: 0,
-        chaveiro: 0,
-        camisa_longa: "",
-        camisa_curta: "",
-        total: document.getElementById('valorTotal').innerText
-    };
+        let dados = {
+            nome: nomeInput.value,
+            caneta: 0, bone_roxo: 0, bone_pescador: 0, bone_australiano: 0, chaveiro: 0,
+            camisa_longa: "", camisa_curta: "",
+            total: document.getElementById('valorTotal').innerText
+        };
 
-    let temItem = false;
-    document.querySelectorAll('.product-card').forEach(card => {
-        // Buscamos pelo texto do <strong> para não ter erro de digitação no data-attribute
-        const nomeProd = card.querySelector('strong').innerText.trim();
-        let qtdTotal = 0;
-        let detalhesTamanhos = "";
+        let temItem = false;
+        document.querySelectorAll('.product-card').forEach(card => {
+            const key = card.getAttribute('data-key');
+            let qtdTotal = 0;
+            let detalhes = "";
 
-        card.querySelectorAll('.qtd').forEach(input => {
-            const q = parseInt(input.value) || 0;
-            if (q > 0) {
-                const tam = input.dataset.v || "";
-                if(tam) detalhesTamanhos += `${tam}:${q} `;
-                qtdTotal += q;
-                temItem = true;
+            card.querySelectorAll('.qtd').forEach(input => {
+                const q = parseInt(input.value) || 0;
+                if (q > 0) {
+                    const v = input.getAttribute('data-v') || "";
+                    if(v) detalhes += `${v}:${q} `;
+                    qtdTotal += q;
+                    temItem = true;
+                }
+            });
+
+            if (key.startsWith("camisa")) {
+                dados[key] = detalhes.trim();
+            } else {
+                dados[key] = qtdTotal;
             }
         });
 
-        // MAPEAMENTO EXATO PELO NOME QUE ESTÁ NO CARD
-        if (nomeProd === "Caneta") dados.caneta = qtdTotal;
-        if (nomeProd === "Boné Roxo") dados.bone_roxo = qtdTotal;
-        if (nomeProd === "Boné Pescador") dados.bone_pescador = qtdTotal;
-        if (nomeProd === "Boné Australiano") dados.bone_australiano = qtdTotal;
-        if (nomeProd === "Chaveiro") dados.chaveiro = qtdTotal;
-        if (nomeProd === "Camisa Manga Longa") dados.camisa_longa = detalhesTamanhos.trim();
-        if (nomeProd === "Camisa Manga Curta") dados.camisa_curta = detalhesTamanhos.trim();
-    });
+        if (!temItem) return alert("Selecione pelo menos um item.");
 
-    if (!temItem) return alert("Selecione pelo menos um item.");
-
-    try {
-        btn.disabled = true;
-        btn.innerText = "⏳ Enviando...";
-        await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
-        alert("✅ Pedido enviado! Verifique a planilha.");
-        location.reload();
-    } catch (e) {
-        alert("❌ Erro de conexão.");
-        btn.disabled = false;
+        try {
+            btn.disabled = true;
+            btn.innerText = "⏳ Enviando...";
+            await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
+            alert("✅ Pedido enviado com sucesso!");
+            location.reload();
+        } catch (e) {
+            alert("❌ Erro de conexão.");
+            btn.disabled = false;
+            btn.innerText = "Finalizar e Enviar 🚀";
+        }
     }
-}
 </script>
-</body></html>
-
-
-
+</body>
+</html>
