@@ -150,11 +150,10 @@
 async function enviarPedido() {
     const nomeInput = document.getElementById('clienteNome');
     const btn = document.getElementById('btnEnviar');
-    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
+    const URL_SCRIPT = "SUA_URL_AQUI"; 
 
     if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
 
-    // Objeto limpo para evitar confusão de colunas
     let dados = {
         nome: nomeInput.value,
         caneta: 0,
@@ -169,26 +168,27 @@ async function enviarPedido() {
 
     let temItem = false;
     document.querySelectorAll('.product-card').forEach(card => {
-        const nomeProd = card.dataset.nome;
-        let qtdTotalDoCard = 0;
+        // Buscamos pelo texto do <strong> para não ter erro de digitação no data-attribute
+        const nomeProd = card.querySelector('strong').innerText.trim();
+        let qtdTotal = 0;
         let detalhesTamanhos = "";
 
         card.querySelectorAll('.qtd').forEach(input => {
             const q = parseInt(input.value) || 0;
             if (q > 0) {
-                const tamanho = input.dataset.v || "";
-                if(tamanho) detalhesTamanhos += `${tamanho}:${q} `;
-                qtdTotalDoCard += q;
+                const tam = input.dataset.v || "";
+                if(tam) detalhesTamanhos += `${tam}:${q} `;
+                qtdTotal += q;
                 temItem = true;
             }
         });
 
-        // Mapeamento direto por nome do produto (conforme o data-nome do seu HTML)
-        if (nomeProd === "Caneta") dados.caneta = qtdTotalDoCard;
-        if (nomeProd === "Boné Roxo") dados.bone_roxo = qtdTotalDoCard;
-        if (nomeProd === "Boné Pescador") dados.bone_pescador = qtdTotalDoCard;
-        if (nomeProd === "Boné Australiano") dados.bone_australiano = qtdTotalDoCard;
-        if (nomeProd === "Chaveiro") dados.chaveiro = qtdTotalDoCard;
+        // MAPEAMENTO EXATO PELO NOME QUE ESTÁ NO CARD
+        if (nomeProd === "Caneta") dados.caneta = qtdTotal;
+        if (nomeProd === "Boné Roxo") dados.bone_roxo = qtdTotal;
+        if (nomeProd === "Boné Pescador") dados.bone_pescador = qtdTotal;
+        if (nomeProd === "Boné Australiano") dados.bone_australiano = qtdTotal;
+        if (nomeProd === "Chaveiro") dados.chaveiro = qtdTotal;
         if (nomeProd === "Camisa Manga Longa") dados.camisa_longa = detalhesTamanhos.trim();
         if (nomeProd === "Camisa Manga Curta") dados.camisa_curta = detalhesTamanhos.trim();
     });
@@ -199,14 +199,14 @@ async function enviarPedido() {
         btn.disabled = true;
         btn.innerText = "⏳ Enviando...";
         await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
-        alert("✅ Pedido enviado com sucesso na ordem correta!");
+        alert("✅ Pedido enviado! Verifique a planilha.");
         location.reload();
     } catch (e) {
         alert("❌ Erro de conexão.");
         btn.disabled = false;
-        btn.innerText = "Finalizar e Enviar 🚀";
     }
 }
 </script>
 </body></html>
+
 
