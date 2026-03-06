@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
+<html lang="pt-br"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Pedidos Veloz</title>
@@ -45,21 +43,17 @@
     </div>
 
     <div id="lista-produtos">
-        <div class="product-card" data-nome="Caneta" data-preco="3">
+        <div class="product-card" data-key="caneta" data-preco="3">
             <div class="product-header">
-                <img src="https://i.postimg.cc/P58MwKvk/5c0af907-237d-4aff-9d4f-b70772fd6011.jpg" class="product-img" onclick="abrirFoto(this.src)" alt="Caneta">
-                <div class="product-info">
-                    <strong>Caneta</strong>
-                    <span class="product-desc">Valor estimado</span>
-                    <span class="price-tag">R$ 3,00</span>
-                </div>
+                <img src="https://i.postimg.cc/P58MwKvk/5c0af907-237d-4aff-9d4f-b70772fd6011.jpg" class="product-img" onclick="abrirFoto(this.src)">
+                <div class="product-info"><strong>Caneta</strong><br><span class="price-tag">R$ 3,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>Qtd</label><input type="number" class="qtd" min="0" value="0" onchange="calcularTotal()"></div>
             </div>
         </div>
 
-        <div class="product-card" data-nome="Boné Roxo" data-preco="15">
+        <div class="product-card" data-key="bone_roxo" data-preco="15">
             <div class="product-header">
                 <img src="https://i.postimg.cc/jjtJShzh/Design-sem-nome-(62).jpg" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Boné Roxo</strong><br><span class="price-tag">R$ 15,00</span></div>
@@ -69,7 +63,7 @@
             </div>
         </div>
 
-        <div class="product-card" data-nome="Boné Pescador" data-preco="10">
+        <div class="product-card" data-key="bone_pescador" data-preco="10">
             <div class="product-header">
                 <img src="https://i.postimg.cc/wM7NdTDS/Design-sem-nome-(61).jpg" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Boné Pescador</strong><br><span class="price-tag">R$ 10,00</span></div>
@@ -79,7 +73,7 @@
             </div>
         </div>
 
-        <div class="product-card" data-nome="Boné Australiano" data-preco="9">
+        <div class="product-card" data-key="bone_australiano" data-preco="9">
             <div class="product-header">
                 <img src="https://i.postimg.cc/TYbyjs0c/Design-sem-nome-(8).png" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Boné Australiano</strong><br><span class="price-tag">R$ 9,00</span></div>
@@ -89,7 +83,7 @@
             </div>
         </div>
 
-        <div class="product-card" data-nome="Chaveiro" data-preco="1.80">
+        <div class="product-card" data-key="chaveiro" data-preco="1.80">
             <div class="product-header">
                 <img src="https://i.postimg.cc/MT4TV0Qj/Design-sem-nome-(64).jpg" class="product-img" onclick="abrirFoto(this.src)">
                 <div class="product-info"><strong>Chaveiro</strong><br><span class="price-tag">R$ 1,80</span></div>
@@ -99,14 +93,10 @@
             </div>
         </div>
 
-        <div class="product-card" data-nome="Camisa Manga Curta" data-preco="25">
+        <div class="product-card" data-key="camisa_longa" data-preco="25">
             <div class="product-header">
-                <img src="https://i.postimg.cc/nLhvnJbR/Whats-App-Image-2026-03-04-at-16-28-24-(1).jpg" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info">
-                    <strong>Camisa Manga Curta</strong>
-                    <span class="product-desc">Camisas em sublimação total, tecido UV, malha fria e proteção +</span>
-                    <span class="price-tag">R$ 25,00</span>
-                </div>
+                <img src="https://i.postimg.cc/Xvsk5vkG/Whats-App-Image-2026-03-04-at-16-28-24.jpg" class="product-img" onclick="abrirFoto(this.src)">
+                <div class="product-info"><strong>Camisa Manga Longa</strong><br><span class="price-tag">R$ 25,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>P</label><input type="number" class="qtd" data-v="P" min="0" value="0" onchange="calcularTotal()"></div>
@@ -117,14 +107,10 @@
             </div>
         </div>
 
-        <div class="product-card" data-nome="Camisa Manga Longa" data-preco="25">
+        <div class="product-card" data-key="camisa_curta" data-preco="25">
             <div class="product-header">
-                <img src="https://i.postimg.cc/Xvsk5vkG/Whats-App-Image-2026-03-04-at-16-28-24.jpg" class="product-img" onclick="abrirFoto(this.src)">
-                <div class="product-info">
-                    <strong>Camisa Manga Longa</strong>
-                    <span class="product-desc">Camisas em sublimação total, tecido UV, malha fria e proteção +</span>
-                    <span class="price-tag">R$ 25,00</span>
-                </div>
+                <img src="https://i.postimg.cc/nLhvnJbR/Whats-App-Image-2026-03-04-at-16-28-24-(1).jpg" class="product-img" onclick="abrirFoto(this.src)">
+                <div class="product-info"><strong>Camisa Manga Curta</strong><br><span class="price-tag">R$ 25,00</span></div>
             </div>
             <div class="variations">
                 <div class="var-item"><label>P</label><input type="number" class="qtd" data-v="P" min="0" value="0" onchange="calcularTotal()"></div>
@@ -170,19 +156,14 @@
 
         let dados = {
             nome: nomeInput.value,
-            caneta: 0,
-            bone_roxo: 0,
-            bone_pescador: 0,
-            bone_australiano: 0,
-            chaveiro: 0,
-            camisa_curta: "",
-            camisa_longa: "",
+            caneta: 0, bone_roxo: 0, bone_pescador: 0, bone_australiano: 0,
+            chaveiro: 0, camisa_curta: "", camisa_longa: "",
             total: document.getElementById('valorTotal').innerText
         };
 
         let temItem = false;
         document.querySelectorAll('.product-card').forEach(card => {
-            const nomeProd = card.dataset.nome;
+            const key = card.dataset.key;
             let qtdCard = 0;
             let detalhes = "";
 
@@ -196,13 +177,11 @@
                 }
             });
 
-            if (nomeProd === "Caneta") dados.caneta = qtdCard;
-            if (nomeProd === "Boné Roxo") dados.bone_roxo = qtdCard;
-            if (nomeProd === "Boné Pescador") dados.bone_pescador = qtdCard;
-            if (nomeProd === "Boné Australiano") dados.bone_australiano = qtdCard;
-            if (nomeProd === "Chaveiro") dados.chaveiro = qtdCard;
-            if (nomeProd === "Camisa Manga Curta") dados.camisa_curta = detalhes;
-            if (nomeProd === "Camisa Manga Longa") dados.camisa_longa = detalhes;
+            if (key === "camisa_curta" || key === "camisa_longa") {
+                dados[key] = detalhes.trim();
+            } else {
+                dados[key] = qtdCard;
+            }
         });
 
         if (!temItem) return alert("Selecione pelo menos um item.");
@@ -211,7 +190,7 @@
             btn.disabled = true;
             btn.innerText = "⏳ Enviando...";
             await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
-            alert("✅ Pedido enviado com sucesso para a planilha!");
+            alert("✅ Pedido enviado com sucesso!");
             location.reload();
         } catch (e) {
             alert("❌ Erro de conexão.");
@@ -220,5 +199,4 @@
         }
     }
 </script>
-</body>
-</html>
+</body></html>
