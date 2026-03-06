@@ -147,56 +147,66 @@
         document.getElementById('valorTotal').innerText = total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
-    async function enviarPedido() {
-        const nomeInput = document.getElementById('clienteNome');
-        const btn = document.getElementById('btnEnviar');
-        const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
+async function enviarPedido() {
+    const nomeInput = document.getElementById('clienteNome');
+    const btn = document.getElementById('btnEnviar');
+    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyjhN9YAZPLFNNpd8Gsa6FvBMlU_bG992V6gWwkRoEncR4uTLf2itCTG4y--Dfc-PQ7/exec"; 
 
-        if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
+    if (!nomeInput.value.trim()) return alert("Por favor, digite seu nome.");
 
-        let dados = {
-            nome: nomeInput.value,
-            caneta: 0, bone_roxo: 0, bone_pescador: 0, bone_australiano: 0,
-            chaveiro: 0, camisa_curta: "", camisa_longa: "",
-            total: document.getElementById('valorTotal').innerText
-        };
+    // Objeto limpo para evitar confusão de colunas
+    let dados = {
+        nome: nomeInput.value,
+        caneta: 0,
+        bone_roxo: 0,
+        bone_pescador: 0,
+        bone_australiano: 0,
+        chaveiro: 0,
+        camisa_longa: "",
+        camisa_curta: "",
+        total: document.getElementById('valorTotal').innerText
+    };
 
-        let temItem = false;
-        document.querySelectorAll('.product-card').forEach(card => {
-            const key = card.dataset.key;
-            let qtdCard = 0;
-            let detalhes = "";
+    let temItem = false;
+    document.querySelectorAll('.product-card').forEach(card => {
+        const nomeProd = card.dataset.nome;
+        let qtdTotalDoCard = 0;
+        let detalhesTamanhos = "";
 
-            card.querySelectorAll('.qtd').forEach(input => {
-                const q = parseInt(input.value) || 0;
-                if (q > 0) {
-                    const v = input.dataset.v || "";
-                    if(v) detalhes += `${v}:${q} `;
-                    qtdCard += q;
-                    temItem = true;
-                }
-            });
-
-            if (key === "camisa_curta" || key === "camisa_longa") {
-                dados[key] = detalhes.trim();
-            } else {
-                dados[key] = qtdCard;
+        card.querySelectorAll('.qtd').forEach(input => {
+            const q = parseInt(input.value) || 0;
+            if (q > 0) {
+                const tamanho = input.dataset.v || "";
+                if(tamanho) detalhesTamanhos += `${tamanho}:${q} `;
+                qtdTotalDoCard += q;
+                temItem = true;
             }
         });
 
-        if (!temItem) return alert("Selecione pelo menos um item.");
+        // Mapeamento direto por nome do produto (conforme o data-nome do seu HTML)
+        if (nomeProd === "Caneta") dados.caneta = qtdTotalDoCard;
+        if (nomeProd === "Boné Roxo") dados.bone_roxo = qtdTotalDoCard;
+        if (nomeProd === "Boné Pescador") dados.bone_pescador = qtdTotalDoCard;
+        if (nomeProd === "Boné Australiano") dados.bone_australiano = qtdTotalDoCard;
+        if (nomeProd === "Chaveiro") dados.chaveiro = qtdTotalDoCard;
+        if (nomeProd === "Camisa Manga Longa") dados.camisa_longa = detalhesTamanhos.trim();
+        if (nomeProd === "Camisa Manga Curta") dados.camisa_curta = detalhesTamanhos.trim();
+    });
 
-        try {
-            btn.disabled = true;
-            btn.innerText = "⏳ Enviando...";
-            await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
-            alert("✅ Pedido enviado com sucesso!");
-            location.reload();
-        } catch (e) {
-            alert("❌ Erro de conexão.");
-            btn.disabled = false;
-            btn.innerText = "Finalizar e Enviar 🚀";
-        }
+    if (!temItem) return alert("Selecione pelo menos um item.");
+
+    try {
+        btn.disabled = true;
+        btn.innerText = "⏳ Enviando...";
+        await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) });
+        alert("✅ Pedido enviado com sucesso na ordem correta!");
+        location.reload();
+    } catch (e) {
+        alert("❌ Erro de conexão.");
+        btn.disabled = false;
+        btn.innerText = "Finalizar e Enviar 🚀";
     }
+}
 </script>
 </body></html>
+
